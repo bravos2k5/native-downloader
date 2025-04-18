@@ -35,5 +35,5 @@ extern "C" {
     __declspec(dllexport) const char* formatBytes(long bytes);
     __declspec(dllexport) const char* formatTime(int seconds);
 
-	__declspec(dllexport) int shutdown();
+	__declspec(dllexport) int shutdownDownloader();
 }

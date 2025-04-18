@@ -1046,7 +1046,7 @@ const char* formatTime(int seconds) {
     return buffer;
 }
 
-int shutdown() {
+int shutdownDownloader() {
 	std::cout << "Shutting down downloader..." << std::endl;
 	for (auto& pair : activeDownloads) {
 		cleanupDownload(pair.second.get());
