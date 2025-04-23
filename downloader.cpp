@@ -343,8 +343,7 @@ int multiDownload(const char* url, const char* outputPath, int threadCount, long
 
             out << in.rdbuf();
             in.close();
-
-            // Delete part and progress files
+            
             DeleteFileA(partFile.c_str());
             DeleteFileA((partFile + ".progress").c_str());
         }
@@ -356,6 +355,17 @@ int multiDownload(const char* url, const char* outputPath, int threadCount, long
         return -1;
     }
 
+	if (fileSize > 0) {
+		std::ifstream in(outputPath, std::ios::binary | std::ios::ate);
+		if (in.is_open()) {
+			long actualSize = in.tellg();
+			in.close();
+			if (actualSize != fileSize) {
+				std::cerr << "Downloaded file size does not match expected size." << std::endl;
+				return -1;
+			}
+		}
+	}
     return 0;
 }
 
